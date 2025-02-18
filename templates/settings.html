@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paramètres du Profil | koued</title>
+  <style>
+    body {
+      background: #fafafa;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .settings-container {
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      padding: 20px;
+      border-radius: 5px;
+      width: 400px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    button {
+      background: #3897f0;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="settings-container">
+    <h2>Paramètres du Profil</h2>
+    <form method="POST" action="{{ url_for('settings') }}" enctype="multipart/form-data">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" name="username" id="username" value="{{ user.username }}" required>
+      
+      <label for="email">Adresse e-mail</label>
+      <input type="email" name="email" id="email" value="{{ user.email }}" required>
+      
+      <label for="profile_pic">Photo de profil</label>
+      <!-- Champ optionnel pour uploader une nouvelle photo -->
+      <input type="file" name="profile_pic" id="profile_pic">
+      
+      <button type="submit">Mettre à jour</button>
+    </form>
+  </div>
+</body>
+</html>
+
