@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Messages | koued</title>
+  <!-- Police pour le logo (Sacramento en remplacement de Billabong) -->
+  <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+  <style>
+    /* Variables pour le thème nuit */
+    :root {
+      --bg-color: #121212;
+      --light-bg: #1f1f1f;
+      --text-color: #e0e0e0;
+      --secondary-text: #a0a0a0;
+      --border-color: #333;
+      --primary-color: #3897f0;
+    }
+    /* Styles globaux */
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: var(--light-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--text-color);
+    }
+    /* Conteneur principal pour la messagerie */
+    .container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    /* Sidebar : liste des conversations */
+    .sidebar {
+      width: 300px;
+      background-color: var(--light-bg);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .conversation {
+      padding: 10px;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+    .conversation:hover {
+      background-color: var(--bg-color);
+    }
+    .conversation .contact-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .conversation .last-message {
+      font-size: 14px;
+      color: var(--secondary-text);
+    }
+    /* Chat principal */
+    .chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-color);
+    }
+    .chat-header {
+      background-color: var(--light-bg);
+      padding: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .chat-header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--text-color);
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+    .message {
+      display: flex;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+    /* Message reçu */
+    .message.received .bubble {
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      padding: 10px;
+      border-radius: 15px;
+      max-width: 60%;
+      margin-right: auto;
+    }
+    /* Message envoyé */
+    .message.sent {
+      justify-content: flex-end;
+    }
+    .message.sent .bubble {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      max-width: 60%;
+      margin-left: auto;
+    }
+    /* Zone d'envoi de message */
+    .chat-input {
+      border-top: 1px solid var(--border-color);
+      padding: 10px;
+      background-color: var(--light-bg);
+    }
+    .chat-input form {
+      display: flex;
+    }
+    .chat-input input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    .chat-input button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Messages</h1>
+  </header>
+  <div class="container">
+    <!-- Sidebar avec la liste des conversations -->
+    <div class="sidebar">
+      <!-- Exemple de conversation statique -->
+      <div class="conversation">
+        <div class="contact-name">Alice</div>
+        <div class="last-message">Salut, comment vas-tu ?</div>
+      </div>
+      <div class="conversation">
+        <div class="contact-name">Bob</div>
+        <div class="last-message">On se voit demain ?</div>
+      </div>
+      <div class="conversation">
+        <div class="contact-name">Charlie</div>
+        <div class="last-message">J'ai envoyé le document.</div>
+      </div>
+      <!-- Vous pouvez boucler sur vos données de conversation ici -->
+    </div>
+    <!-- Zone de chat principal -->
+    <div class="chat">
+      <div class="chat-header">
+        <h2>Conversation avec Alice</h2>
+      </div>
+      <div class="chat-messages">
+        <!-- Exemple de messages statiques -->
+        <div class="message received">
+          <div class="bubble">Salut, comment vas-tu ?</div>
+        </div>
+        <div class="message sent">
+          <div class="bubble">Bien, merci ! Et toi ?</div>
+        </div>
+        <!-- Ajoutez des messages dynamiques ici via Jinja2 -->
+      </div>
+      <div class="chat-input">
+        <form action="#" method="POST">
+          <input type="text" name="message" placeholder="Tapez votre message..." required>
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
 ﻿
