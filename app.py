@@ -6,6 +6,21 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
 
+@app.route('/messages', methods=['GET', 'POST'])
+@login_required
+def messages():
+    if request.method == 'POST':
+        # Traitement de l'envoi d'un message
+        message_text = request.form.get('message')
+        # Vous ajouteriez ici la logique pour sauvegarder le message en base de données,
+        # associer l'expéditeur et le destinataire, etc.
+        flash("Message envoyé", "success")
+        return redirect(url_for('messages'))
+    
+    # Pour un affichage dynamique, récupérez vos conversations/messages depuis la base
+    conversations = []  # Remplacez par la requête vers votre modèle Conversation ou Message
+    return render_template('messages.html', conversations=conversations)
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///social.db'
