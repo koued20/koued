@@ -1,9 +1,9 @@
 import os
 import time
-from flask import Flask, render_template, request, redirect, session, url_for, flash
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
+from flask import Flask, render_template, request, redirect, session, url_for, flash # type: ignore
+from flask_sqlalchemy import SQLAlchemy # type: ignore
+from werkzeug.security import generate_password_hash, check_password_hash # type: ignore
+from werkzeug.utils import secure_filename # type: ignore
 from functools import wraps
 
 # Configuration de l'application
@@ -54,12 +54,11 @@ def login_required(f):
     return decorated_function
 
 # --- Routes principales ---
-@app.route('/')
-@login_required
-def index():
-    user = User.query.get(session['user_id'])
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template('index.html', user=user, posts=posts)
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Votre logique de connexion ici
+    return render_template('login.html')
+
 
 @app.route('/messages', methods=['GET', 'POST'])
 @login_required
