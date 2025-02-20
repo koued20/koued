@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Messages | koued</title>
+  <a href="{{ url_for('messages') }}" title="Messages">
+  <svg aria-label="Messages" viewBox="0 0 24 24" width="24" height="24">
+    <path d="M19.005 3.175H4.674C3.642 3.175 3 3.789 3 4.821V21.02l3.544-3.514h12.461c1.033 0 2.064-1.06 2.064-2.093V4.821c-.001-1.032-1.032-1.646-2.064-1.646Zm-4.989 9.869H7.041V11.1h6.975v1.944Zm3-4H7.041V7.1h9.975v1.944Z" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="1.5"
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+  </svg>
+</a>
   <!-- Police pour le logo (Sacramento en remplacement de Billabong) -->
   <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
   <style>
@@ -221,6 +231,107 @@
         <div class="message sent">
           <div class="bubble">Bien, merci ! Et toi ?</div>
         </div>
+        .messages-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.conversations {
+  flex: 1;
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.conversations ul {
+  list-style: none;
+  padding: 0;
+}
+
+.conversations li {
+  margin-bottom: 10px;
+}
+
+.conversations a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.conversations img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat {
+  flex: 3;
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 70%;
+}
+
+.message.sent {
+  background-color: var(--primary-color);
+  color: white;
+  margin-left: auto;
+}
+
+.message.received {
+  background-color: var(--border-color);
+  color: var(--text-color);
+  margin-right: auto;
+}
+
+.message small {
+  display: block;
+  font-size: 0.8em;
+  margin-top: 5px;
+  opacity: 0.7;
+}
+
+.chat form {
+  display: flex;
+  gap: 10px;
+}
+
+.chat textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.chat button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
         <!-- Ajoutez des messages dynamiques ici via Jinja2 -->
       </div>
       <div class="chat-input">
