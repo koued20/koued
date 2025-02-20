@@ -52,6 +52,18 @@ class Post(db.Model):
     image_filename = db.Column(db.String(100))  # chemin relatif vers l'image uploadée
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     timestamp = db.Column(db.DateTime, server_default=db.func.now())
+    # Dans app.py
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, server_default=db.func.now())
+    is_read = db.Column(db.Boolean, default=False)
+
+    # Relations
+    sender = db.relationship('User', foreign_keys=[sender_id], backref='sent_messages')
+    receiver = db.relationship('User', foreign_keys=[receiver_id], backref='received_messages')
 
 # --- Décorateur pour protéger les routes ---
 def login_required(f):
