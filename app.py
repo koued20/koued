@@ -6,7 +6,26 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
 
-@app.route('/messages', methods=['GET', 'POST'])
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    if 'user_id' not in session:
+        return redirect('/login')
+    
+    receiver_id = request.form.get('receiver_id')
+    content = request.form.get('content')
+    
+    if not receiver_id or not content:
+        return "Destinataire ou contenu manquant", 400
+    
+    new_message = Message(
+        sender_id=session['user_id'],
+        receiver_id=receiver_id,
+        content=content
+    )
+    db.session.add(new_message)
+    db.session.commit()
+    
+    return redirect('/messages')
 @login_required
 def messages():
     if request.method == 'POST':
@@ -159,7 +178,31 @@ def settings():
     return render_template('settings.html', user=user)
 
 # (Optionnel) Route de création de post
-@app.route('/post', methods=['POST'])
+@app.route('/messages')
+def messages():
+    if 'user_id' not in session:
+        return redirect('/login')
+    
+    user_id = session['user_id']
+    
+    # Récupérer les conversations
+    conversations = db.session.query(
+        Message.sender_id,
+        Message.receiver_id
+    ).filter(
+        (Message.sender_id == user_id) | (Message.receiver_id == user_id)
+    ).distinct().all()
+    
+    # Récupérer les messages avec un utilisateur spécifique
+    other_user_id = request.args.get('user_id')
+    messages = []
+    if other_user_id:
+        messages = Message.query.filter(
+            ((Message.sender_id == user_id) & (Message.receiver_id == other_user_id)) |
+            ((Message.sender_id == other_user_id) & (Message.receiver_id == user_id))
+        ).order_by(Message.timestamp.asc()).all()
+    
+    return render_template('messages.html', conversations=conversations, messages=messages, user_id=user_id)
 @login_required
 def create_post():
     content = request.form.get('content')
