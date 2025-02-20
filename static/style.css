@@ -1,0 +1,104 @@
+/* Styles généraux */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #333;
+}
+
+/* Barre de navigation */
+nav {
+    background: #1877f2;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    margin-right: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #ffdd57;
+    text-decoration: underline;
+}
+
+/* Conteneur du formulaire */
+form {
+    background: white;
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Champs de saisie */
+input, button {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.7rem 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: #1877f2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
+}
+
+/* Boutons */
+button {
+    background: #1877f2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #0e5db7;
+    transform: scale(1.05);
+}
+
+/* Liens */
+a {
+    display: block;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: #1877f2;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #ffdd57;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    form {
+        width: 90%;
+    }
+}
