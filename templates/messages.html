@@ -148,6 +148,48 @@
   <header>
     <h1>Messages</h1>
   </header>
+  {% extends "base.html" %}
+
+{% block content %}
+<div class="messages-container">
+  <!-- Liste des conversations -->
+  <div class="conversations">
+    <h3>Conversations</h3>
+    <ul>
+      {% for conv in conversations %}
+        {% set other_user = conv.sender if conv.sender_id != user_id else conv.receiver %}
+        <li>
+          <a href="{{ url_for('messages', user_id=other_user.id) }}">
+            <img src="{{ url_for('static', filename=other_user.profile_pic) }}" alt="{{ other_user.username }}">
+            <span>{{ other_user.username }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Messages avec un utilisateur spécifique -->
+  <div class="chat">
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="message {% if message.sender_id == user_id %}sent{% else %}received{% endif %}">
+            <p>{{ message.content }}</p>
+            <small>{{ message.timestamp.strftime('%d/%m/%Y %H:%M') }}</small>
+          </div>
+        {% endfor %}
+      </div>
+      <form action="{{ url_for('send_message') }}" method="POST">
+        <input type="hidden" name="receiver_id" value="{{ other_user_id }}">
+        <textarea name="content" placeholder="Écrivez un message..." required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    {% else %}
+      <p>Sélectionnez une conversation pour commencer à discuter.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
   <div class="container">
     <!-- Sidebar avec la liste des conversations -->
     <div class="sidebar">
